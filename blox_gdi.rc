@@ -1,0 +1,25 @@
+1 24 "blox_gdi.manifest"
+
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904E4"
+    BEGIN
+      VALUE "CompanyName", "N/A"
+      VALUE "FileDescription", "blox_gdi"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "blox_gdi"
+      VALUE "LegalCopyright", "N/A"
+      VALUE "OriginalFilename", "blox_gdi.exe"
+      VALUE "ProductName", "blox_gdi"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1252
+  END
+END
