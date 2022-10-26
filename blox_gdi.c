@@ -8,6 +8,8 @@
 #include "board.h"
 #include "game.h"
 
+#define GAME_TIMER 1
+
 LRESULT CALLBACK WindowProcedure(HWND, UINT, WPARAM, LPARAM);
 
 // get the system message box font
@@ -56,10 +58,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR argument,
 
   hwnd = CreateWindowEx(WS_EX_LEFT, "blox_gdi", "blox_gdi",
                         WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
-                        CW_USEDEFAULT, CW_USEDEFAULT, 255, 475, HWND_DESKTOP,
+                        CW_USEDEFAULT, CW_USEDEFAULT, 355, 475, HWND_DESKTOP,
                         NULL, instance, NULL);
 
-  if (game_init(&game) == false) {
+  if (game_init(&game, 0, 0) == false) {
     MessageBox(hwnd, "Failed to allocate memory for board", "blox_gdi",
                MB_ICONERROR);
     return 0;
@@ -73,9 +75,9 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR argument,
     return 0;
   }
 
-  game_start(&game);
+  game_start(&game, 2);
   game_step(&game);
-  SetTimer(hwnd, 1, 300, NULL);
+  SetTimer(hwnd, GAME_TIMER, game.delay, NULL);
 
   ShowWindow(hwnd, cmdShow);
   while (GetMessage(&messages, NULL, 0, 0)) {
@@ -103,6 +105,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam,
   HDC dc;
   gameStruct *game;
   static bool left, right, up, down = false;
+  static int timer_delay = 0;
+  static HFONT font;
   switch (message) {
   case WM_GETDLGCODE:
     return DLGC_WANTALLKEYS;
@@ -111,6 +115,10 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam,
     if (game) {
       game_step(game);
       InvalidateRect(hwnd, NULL, false);
+      if (game->delay != timer_delay) {
+        timer_delay = game->delay;
+        SetTimer(hwnd, GAME_TIMER, game->delay, NULL);
+      }
     }
     return 0;
   case WM_PAINT:
@@ -170,8 +178,14 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam,
       break;
     }
     return 0;
+  case WM_CREATE:
+    font = getFont();
+    dc = GetDC(hwnd);
+    SelectObject(dc, font);
+    SetBkColor(dc, GetSysColor(COLOR_BTNFACE));
+    return 0;
   case WM_DESTROY:
-    // DeleteObject(font);
+    DeleteObject(font);
     PostQuitMessage(0);
     break;
   default:

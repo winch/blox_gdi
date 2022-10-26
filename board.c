@@ -26,6 +26,7 @@ size_t board_clear_completed_rows(gameBoard *board) {
     }
     if (complete_line == true) {
       board_remove_row(board, y);
+      lines += 1;
       y++;
     }
   }

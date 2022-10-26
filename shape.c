@@ -69,7 +69,7 @@ uint8_t shape_get_block(shapeBlock *shape, size_t x, size_t y) {
   return *(shape->blocks + x + (SHAPE_WIDTH * y));
 }
 
-void shape_random(shapeBlock *shape, gameBoard *board) {
+bool shape_random(shapeBlock *shape, gameBoard *board) {
   shape_clear(shape);
   shape->active = true;
   shape->x = 3;
@@ -128,6 +128,7 @@ void shape_random(shapeBlock *shape, gameBoard *board) {
     shape_set_block(shape, colour, 2, 2);
     break;
   }
+  return shape_can_move(shape, board, 0, 0);
 }
 
 void shape_rotate(shapeBlock *shape, gameBoard *board) {

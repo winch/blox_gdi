@@ -10,7 +10,15 @@
 typedef struct {
   gameBoard *board;
   shapeBlock *shape;
+  int x;
+  int y;
   bool running;
+  bool over;
+  int score;
+  int lines;
+  int level;
+  int start_level;
+  int delay;
 } gameStruct;
 
 typedef enum {
@@ -22,13 +30,13 @@ typedef enum {
   INPUT_ROTATE
 } gameInput;
 
-bool game_init(gameStruct *game);
+bool game_init(gameStruct *game, int x, int y);
 
 void game_free(gameStruct *game);
 
 void game_user_input(gameStruct *game, gameInput input);
 
-void game_start(gameStruct *game);
+void game_start(gameStruct *game, int level);
 
 void game_step(gameStruct *game);
 

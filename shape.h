@@ -21,7 +21,7 @@ void shape_clear(shapeBlock *shape);
 
 void shape_freeze_to_board(shapeBlock *shape, gameBoard *board);
 
-void shape_random(shapeBlock *shape, gameBoard *board);
+bool shape_random(shapeBlock *shape, gameBoard *board);
 
 void shape_rotate(shapeBlock *shape, gameBoard *board);
 
