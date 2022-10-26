@@ -75,7 +75,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR argument,
     return 0;
   }
 
-  game_start(&game, 2);
+  game_start(&game, 1);
   game_step(&game);
   SetTimer(hwnd, GAME_TIMER, game.delay, NULL);
 
