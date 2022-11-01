@@ -97,7 +97,7 @@ void game_start(gameStruct *game, int level) {
   game->running = true;
   game->over = false;
   game->score = 0;
-  game->lines = 9;
+  game->lines = 0;
   game->level = level;
   game->start_level = game->level;
   game->delay = game_get_delay_for_level(game->level);
