@@ -41,13 +41,17 @@ void board_init(gameBoard *board, const size_t width, const size_t height,
   board->x = x;
   board->y = y;
   board->block_colour_count = BOARD_BLOCK_COLOUR_COUNT;
-  assert(BOARD_BLOCK_COLOUR_COUNT >= 6);
-  board->block_colour[0] = CreateSolidBrush(RGB(0, 0, 0));
-  board->block_colour[1] = CreateSolidBrush(RGB(255, 0, 0));
-  board->block_colour[2] = CreateSolidBrush(RGB(0, 255, 0));
-  board->block_colour[3] = CreateSolidBrush(RGB(0, 0, 255));
-  board->block_colour[4] = CreateSolidBrush(RGB(255, 255, 0));
-  board->block_colour[5] = CreateSolidBrush(RGB(255, 0, 255));
+  assert(BOARD_BLOCK_COLOUR_COUNT >= 10);
+  board->block_colour[0] = CreateSolidBrush(RGB(0, 0, 0)); // black
+  board->block_colour[1] = CreateSolidBrush(RGB(255, 0, 0)); // red
+  board->block_colour[2] = CreateSolidBrush(RGB(0, 255, 0)); // green
+  board->block_colour[3] = CreateSolidBrush(RGB(0, 0, 255)); // blue
+  board->block_colour[4] = CreateSolidBrush(RGB(255, 255, 0)); // yellow
+  board->block_colour[5] = CreateSolidBrush(RGB(255, 0, 255)); // magenta
+  board->block_colour[6] = CreateSolidBrush(RGB(255, 165, 0)); // orange
+  board->block_colour[7] = CreateSolidBrush(RGB(138, 43, 226)); // violet
+  board->block_colour[8] = CreateSolidBrush(RGB(0, 255, 127)); // spring green
+  board->block_colour[9] = CreateSolidBrush(RGB(135, 206, 235)); // sky blue
   board->board = calloc(width * height, sizeof(uint8_t));
 }
 

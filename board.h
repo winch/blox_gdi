@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-#define BOARD_BLOCK_COLOUR_COUNT 6
+#define BOARD_BLOCK_COLOUR_COUNT 10
 
 typedef struct {
   size_t width;
