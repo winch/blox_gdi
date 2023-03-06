@@ -1,7 +1,7 @@
 
+#include <stdio.h>
 #include <time.h>
 #include <windows.h>
-#include <stdio.h>
 
 #include "board.h"
 #include "game.h"
@@ -111,8 +111,9 @@ void game_step(gameStruct *game) {
       } else {
         shape_freeze_to_board(game->shape, game->board);
         int lines = board_clear_completed_rows(game->board);
-        game->lines += lines;
         if (lines > 0) {
+          game->lines += lines;
+          game->score += (10 * (lines * lines)) * game->level;
           game_update_level(game);
         }
         if (shape_random(game->shape, game->board) == false) {
@@ -137,6 +138,7 @@ void game_paint(gameStruct *game, HDC dc) {
   r.right = r.left + 60;
   r.top = game->y + 20;
   r.bottom = r.top + 50;
-  snprintf(text, text_length, "score : %d\nlines : %d\nlevel : %d", game->score, game->lines, game->level);
+  snprintf(text, text_length, "score : %d\nlines : %d\nlevel : %d", game->score,
+           game->lines, game->level);
   DrawText(dc, text, -1, &r, DT_EDITCONTROL);
 }
